@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to JOY App</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f2f2f2;
+      font-family: 'Arial', sans-serif;
+    }
+    .container {
+      max-width: 90%;
+      margin: 30px auto;
+      background: #ffffff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    .header {
+      text-align: center;
+      padding: 5% 2%; 
+      background-color: #ff3366;
+      color: white;
+    }
+    .header img {
+      height: auto;
+      max-width: 100%; 
+    }
+    .header h2 {
+      margin: 10px 0 0;
+      font-size: 2em; 
+    }
+    .content {
+      padding: 5%; 
+      color: #333333;
+    }
+    .section {
+      margin-top: 25px;
+    }
+    .section h3 {
+      color: #FF6600; 
+      font-size: 1.2em; 
+      border-bottom: 2px solid #FF6600;
+      padding-bottom: 5px;
+    }
+    p {
+      margin: 10px 0;
+      line-height: 1.6;
+    }
+    .benefit {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 15px;
+      background: #f9f9f9;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .benefit img {
+      width: 30px;
+      height: 30px;
+      margin-right: 10px;
+    }
+    .benefit-text {
+      color: #555;
+    }
+    .app-buttons {
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 15px;
+    }
+    .app-buttons img {
+      height: auto; 
+      max-width: 100%; 
+    }
+    .footer {
+      text-align: center;
+      background: #f7f7f7;
+      padding: 20px;
+      font-size: 13px;
+      color: #999;
+    }
+    a {
+      color: #007BFF;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .admin-emails {
+      display: flex;
+      flex-direction: column; 
+      border-top: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+      padding: 10px 0;
+    }
+    .admin-emails div {
+      margin-bottom: 10px; 
+text-align: center;
+    }
+
+    @media (min-width: 600px) {
+      .admin-emails {
+        flex-direction: row; 
+      }
+      .admin-emails div {
+        flex: 1;
+        border-right: 1px solid #ddd;
+      }
+      .admin-emails div:last-child {
+        border-right: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADoAAAA6CAMAAADWZboaAAAAxlBMVEX/AGr/ZiX/bQ3/YDD/ahb/AGf/ZCv/AG3/AHD/////S0v/bwL/aCD/Wzv/QVH/bgD/PFf/aRz/M1v/dADeXgz/VT//KF//XzX/UEX/FWT/HmL/+vr/CmX/8PH/R1H/Wjb/5eX/AVT/ATr/2tz/ZEb/Pmr/mqH/QwP/Akn/AQX/rK3/AGH/xsn/0dL/urz/hY//WFD/IQL/YXr/VV3/Nyb/fHL/dYf/L1H/ACb/SiL/Iz3/bGP/T2r/lZD/REH8YR/8YgvPWRO0IyWNAAAET0lEQVRIx8WVa3uiOBSAs9NSGztahl21gMEQwlXuIOK1nf//p/YkqKV9OtOt82FfMJBw3hNC0hT9/Oda0OPf14JeHh6vBH17eHwAHmX5JaDXb58DMR+ot9/+M7dvT/R8ey1/pP74/uM60PP3a0HPf32V36p3gk9ToJu7D3jx/ee7zwD1vTy783kU8efP1ffwFz8iGKf+7Ob3oMXsxI04b2bc5wnGJqZfUAE+49xfUQxQz5+9g3P+po4WI3HIYuPzRXEwoU+Ko2K0ADgX5YhzeOwXvmw7A+oJ7h+iwo9MeNl0hx1/JPMtuHjmQ22zSlebUQ80Od1MeJHgxBHDdIodpiKKQ164LngcbUZ+ip3RhvfVM9x3xCDhA/FiZZIFtBQ7QlY+DB/jg79JMdn5/BI/eVVz6FWY5moz2ZlENK1iSp1NXkQYe4VQV37eU5/O5IUnTHwodrVU6wOhhxVZbYoY8tWTBNQ6nzxNxPlGneQ1dEsORZ4LNT/WjhPFNfGK0MEE2iimuzq/xD+h4+lmCL/aS3dF/pTXKxmLvYMZkSj0YPx1nUGZv1GHfYrwmA+HUh2GHl7VsCIphVE4RZ1CeRSPz6BjX60qWYaZUGO8CzOCzQQKp8hhNHHdhT116tCyhkNr2BXHcad6mB5bx6yGYYoPoUUwDbPYwVHYdWp16tjqUVWVNR5XYYTpdkvN3dGiuNnuCCZZnDo4a6teMBr3qLZha1mgpjhhoMo3r7Zj+IMwSWYSa1uNrcvRV6229Jp2bVltjOOWOfiwpjjeWm0C8500ONmKd7qAxuoZi8Hax8l6bG0dnDIWYwLdeW3FMlhmZYrLcAvRUpDq+qLKCBzv1fWe4IgxT1Sd9Vqt1p7j7U3aRNlWlbLUkaqp4oT4VuwOTavuGcy+x9YqTCpp2H7N2jAMSyIypezSk4rWWocqQ9NwDzlguWeBGjRxWgZrpnoJiQPIm2SZUwbqSdAuqhs0MNKMuZrG4LOUgaYFjAVBmUIzIQ02vZYx6jHtVZ1q8gAVS8MN4N3I3oZsUymStDSSxozDEr5GX52e0OwS0je267awWulUc22miV01dtvApfsss43AwU2gnY2LCkBcFO7ZXsQHNtM9mBviMchm0yhkgQ3T5do91ZBMDRfWAKYuc8U+k4WuJ660Ya6rT2H0kRdRkRIiz6pxxg08sTHFRGwyUUrlNrVn7lQ3poGccniH0p5eBGToZwzbERsMNk0ZBhfHtV1o1435stvysmBqyAYoDKTPz4dhd9PebW7gx0vbnZ+ylhSTpLFfO9J1NFfmJxTDdmNimo4cJfzrsJfTpWiHQ7enTWmDuZxfQEuknEE6dNOUSuCmTuzptmIoqPfIXhqK8hqt9FVloCtLe7mcQxgEQn/9R7rer59UdEF5dyMjToGDAULv1atZDq5WFVAHABrIy+BS7U6EuuKjDpT7wZX8f+r9rxlA4vtfq9fyJyq6Xr1+Nf0L8Mbt1gfUO+AAAAAASUVORK5CYII=" alt="JOY Logo">
+      <h2>Welcome to JOY App</h2>
+    </div>
+
+    <div class="content">
+      <p>Hi <strong>Ahad Ali</strong>,</p>
+      <p>Welcome to <strong>JOY App</strong> – your all-in-one solution for modern tenant living.</p>
+
+      <div class="section">
+        <h3>🔐 Your Login Details:</h3>
+        <p>
+          <strong>Property Name:</strong> Viva Bahriya Tower 3<br>
+          <strong>Username:</strong> 66105029<br>
+          <strong>Password:</strong> 9379
+        </p>
+      </div>
+
+      <div class="section">
+        <h3>📱 Why Use the JOY App?</h3>
+
+        <div class="benefit">
+          <img src="https://img.icons8.com/ios-filled/50/maintenance.png" alt="Maintenance">
+          <div>
+            <strong>Request Services</strong><br>
+            <span class="benefit-text">Submit maintenance requests with photos and notes.</span>
+          </div>
+        </div>
+
+        <div class="benefit">
+          <img src="https://img.icons8.com/ios-filled/50/chat.png" alt="Chat">
+          <div>
+            <strong>Real-Time Chat</strong><br>
+            <span class="benefit-text">Talk directly to staff and technicians via in-app chat.</span>
+          </div>
+        </div>
+
+        <div class="benefit">
+          <img src="https://img.icons8.com/ios-filled/50/alarm.png" alt="Alerts">
+          <div>
+            <strong>Smart Alerts</strong><br>
+            <span class="benefit-text">Get notified about bookings, requests, and messages.</span>
+          </div>
+        </div>
+
+        <div class="benefit">
+          <img src="https://img.icons8.com/ios-filled/50/combo-chart.png" alt="Feedback">
+          <div>
+            <strong>Feedback</strong><br>
+            <span class="benefit-text">Rate your service experience directly in the app.</span>
+          </div>
+        </div>
+
+        <div class="benefit">
+          <img src="https://img.icons8.com/ios-filled/50/000000/swimming-pool.png" alt="Amenities">
+          <div>
+            <strong>Amenities</strong><br>
+            <span class="benefit-text">Check available and occupied amenities at a glance.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3>📞 Need Help?</h3>
+        <p>If you experience any issues, please contact your building reception or admin team.</p>
+        <div class="admin-emails">
+          <div>
+            <strong>Property Manager:</strong><br>
+            <a href="mailto:vb00@bhomesqatar.com">vb00@bhomesqatar.com</a>
+          </div>
+          <div>
+            <strong>Receptionist:</strong><br>
+            <a href="mailto:vb00receptionist@bhomesqatar.com">vb00receptionist@bhomesqatar.com</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3 style="color: #FF6600; font-size: 1.2em; border-bottom: 2px solid #FF6600; padding-bottom: 5px;"></h3>
+        <div class="app-buttons">
+          <a href="https://apps.apple.com/app/idYOUR_APP_ID" target="_blank">
+           <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="App Store" width="130">
+
+
+          </a>
+          <a href="https://play.google.com/store/apps/details?id=YOUR_APP_ID" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" width="135">
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <a href="https://joyapp.ai/">&copy; 2025 JOY App. All rights reserved.</a>
+    </div>
+  </div>
+</body>
+</html>
