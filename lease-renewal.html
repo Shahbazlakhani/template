@@ -1,0 +1,379 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lease Renewal Notice - JOY App</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            max-width: 90%;
+            margin: 30px auto;
+            background: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            text-align: center;
+            padding: 5% 2%;
+            background-color: #ff3366;
+            color: white;
+        }
+
+            .header img {
+                height: auto;
+                max-width: 100%;
+            }
+
+            .header h3 {
+                margin: 10px 0 0;
+                font-size: 2em;
+            }
+
+        .content {
+            padding: 5%;
+            color: #333333;
+        }
+
+        .section {
+            margin-top: 25px;
+        }
+
+            .section h3 {
+                color: #FF6600;
+                font-size: 1.2em;
+                border-bottom: 2px solid #FF6600;
+                padding-bottom: 5px;
+            }
+
+        .scroll-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .benefit-icons {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding: 10px 40px;
+            margin-top: 25px;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+            position: relative;
+        }
+
+        .icon-item {
+            flex: 0 0 auto;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            min-width: 100px;
+            color: #333;
+            font-size: 14px;
+        }
+
+            .icon-item img {
+                width: 40px;
+                height: 40px;
+                margin-bottom: 10px;
+            }
+
+        .scroll-arrow {
+            background: #ffffff;
+            color: #333;
+            border: 1px solid #ccc;
+            font-size: 22px;
+            padding: 10px;
+            cursor: pointer;
+            position: absolute;
+            top: 40%; /* updated from 50% to 40% */
+            transform: translateY(-40%); /* updated from -50% to -40% */
+            z-index: 5;
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: background 0.2s;
+        }
+
+
+            .scroll-arrow:hover {
+                background: #eee;
+            }
+
+            .scroll-arrow.left {
+                left: 10px;
+            }
+
+            .scroll-arrow.right {
+                right: 10px;
+            }
+
+        @media (min-width: 768px) {
+            .benefit-icons {
+                flex-wrap: wrap;
+                justify-content: center;
+                overflow-x: visible;
+                padding: 10px;
+            }
+
+            .icon-item {
+                min-width: 120px;
+            }
+
+            .scroll-arrow {
+                display: none;
+            }
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 12px;
+            margin-top: 30px;
+            width: 100%;
+        }
+
+            .buttons a {
+                text-decoration: none;
+                padding: 14px 20px;
+                border-radius: 8px;
+                font-size: 16px;
+                font-weight: bold;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                width: 100%;
+                box-sizing: border-box;
+                min-height: 50px;
+            }
+
+        .btn-yes {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .btn-no {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .btn-deciding {
+            background-color: #ffc107;
+            color: black;
+        }
+
+        .buttons a img {
+            width: 18px;
+            height: 18px;
+        }
+
+        @media (min-width: 768px) {
+            .buttons {
+                flex-direction: row;
+                justify-content: center;
+            }
+
+                .buttons a {
+                    width: auto;
+                    min-width: 220px;
+                }
+        }
+
+        .footer {
+            text-align: center;
+            background: #f7f7f7;
+            padding: 20px;
+            font-size: 13px;
+            color: #999;
+        }
+
+        .admin-emails {
+            display: flex;
+            flex-direction: column;
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+        }
+
+            .admin-emails div {
+                margin-bottom: 10px;
+                text-align: center;
+            }
+
+        @media (min-width: 600px) {
+            .admin-emails {
+                flex-direction: row;
+            }
+
+                .admin-emails div {
+                    flex: 1;
+                    border-right: 1px solid #ddd;
+                }
+
+                    .admin-emails div:last-child {
+                        border-right: none;
+                    }
+        }
+
+
+        @media (max-width: 500px) {
+            .scroll-arrow {
+                top: 35%;
+                transform: translateY(-35%);
+                padding: 6px;
+                font-size: 18px;
+            }
+
+            .benefit-icons {
+                padding: 10px 30px;
+                gap: 15px;
+            }
+
+            .icon-item img {
+                width: 36px;
+                height: 36px;
+            }
+        }
+    </style>
+
+    <script>
+        let scrollInterval;
+
+        function startScroll(direction) {
+            const scrollContainer = document.getElementById("benefitScroll");
+            const scrollStep = direction * 10;
+
+            scrollInterval = setInterval(() => {
+                scrollContainer.scrollBy({
+                    left: scrollStep,
+                    behavior: 'smooth'
+                });
+            }, 100);
+        }
+
+        function stopScroll() {
+            clearInterval(scrollInterval);
+        }
+
+        // ✅ New function for click/tap scroll
+        function scrollOnce(direction) {
+            const scrollContainer = document.getElementById("benefitScroll");
+            scrollContainer.scrollBy({
+                left: direction * 150, // Adjust distance if needed
+                behavior: 'smooth'
+            });
+        }
+    </script>
+
+
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADoAAAA6CAMAAADWZboaAAAAxlBMVEX/AGr/ZiX/bQ3/YDD/ahb/AGf/ZCv/AG3/AHD/////S0v/bwL/aCD/Wzv/QVH/bgD/PFf/aRz/M1v/dADeXgz/VT//KF//XzX/UEX/FWT/HmL/+vr/CmX/8PH/R1H/Wjb/5eX/AVT/ATr/2tz/ZEb/Pmr/mqH/QwP/Akn/AQX/rK3/AGH/xsn/0dL/urz/hY//WFD/IQL/YXr/VV3/Nyb/fHL/dYf/L1H/ACb/SiL/Iz3/bGP/T2r/lZD/REH8YR/8YgvPWRO0IyWNAAAET0lEQVRIx8WVa3uiOBSAs9NSGztahl21gMEQwlXuIOK1nf//p/YkqKV9OtOt82FfMJBw3hNC0hT9/Oda0OPf14JeHh6vBH17eHwAHmX5JaDXb58DMR+ot9/+M7dvT/R8ey1/pP74/uM60PP3a0HPf32V36p3gk9ToJu7D3jx/ee7zwD1vTy783kU8efP1ffwFz8iGKf+7Ob3oMXsxI04b2bc5wnGJqZfUAE+49xfUQxQz5+9g3P+po4WI3HIYuPzRXEwoU+Ko2K0ADgX5YhzeOwXvmw7A+oJ7h+iwo9MeNl0hx1/JPMtuHjmQ22zSlebUQ80Od1MeJHgxBHDdIodpiKKQ164LngcbUZ+ip3RhvfVM9x3xCDhA/FiZZIFtBQ7QlY+DB/jg79JMdn5/BI/eVVz6FWY5moz2ZlENK1iSp1NXkQYe4VQV37eU5/O5IUnTHwodrVU6wOhhxVZbYoY8tWTBNQ6nzxNxPlGneQ1dEsORZ4LNT/WjhPFNfGK0MEE2iimuzq/xD+h4+lmCL/aS3dF/pTXKxmLvYMZkSj0YPx1nUGZv1GHfYrwmA+HUh2GHl7VsCIphVE4RZ1CeRSPz6BjX60qWYaZUGO8CzOCzQQKp8hhNHHdhT116tCyhkNr2BXHcad6mB5bx6yGYYoPoUUwDbPYwVHYdWp16tjqUVWVNR5XYYTpdkvN3dGiuNnuCCZZnDo4a6teMBr3qLZha1mgpjhhoMo3r7Zj+IMwSWYSa1uNrcvRV6229Jp2bVltjOOWOfiwpjjeWm0C8500ONmKd7qAxuoZi8Hax8l6bG0dnDIWYwLdeW3FMlhmZYrLcAvRUpDq+qLKCBzv1fWe4IgxT1Sd9Vqt1p7j7U3aRNlWlbLUkaqp4oT4VuwOTavuGcy+x9YqTCpp2H7N2jAMSyIypezSk4rWWocqQ9NwDzlguWeBGjRxWgZrpnoJiQPIm2SZUwbqSdAuqhs0MNKMuZrG4LOUgaYFjAVBmUIzIQ02vZYx6jHtVZ1q8gAVS8MN4N3I3oZsUymStDSSxozDEr5GX52e0OwS0je267awWulUc22miV01dtvApfsss43AwU2gnY2LCkBcFO7ZXsQHNtM9mBviMchm0yhkgQ3T5do91ZBMDRfWAKYuc8U+k4WuJ660Ya6rT2H0kRdRkRIiz6pxxg08sTHFRGwyUUrlNrVn7lQ3poGccniH0p5eBGToZwzbERsMNk0ZBhfHtV1o1435stvysmBqyAYoDKTPz4dhd9PebW7gx0vbnZ+ylhSTpLFfO9J1NFfmJxTDdmNimo4cJfzrsJfTpWiHQ7enTWmDuZxfQEuknEE6dNOUSuCmTuzptmIoqPfIXhqK8hqt9FVloCtLe7mcQxgEQn/9R7rer59UdEF5dyMjToGDAULv1atZDq5WFVAHABrIy+BS7U6EuuKjDpT7wZX8f+r9rxlA4vtfq9fyJyq6Xr1+Nf0L8Mbt1gfUO+AAAAAASUVORK5CYII=" alt="JOY Logo">
+            <h3>Welcome to JOY App</h3>
+        </div>
+
+        <div class="content">
+            <div class="section">
+                <p>Dear Youssef Chaanine,</p>
+                <p>We are writing to inform you that your current lease agreement for the subject apartment will expire on <strong>30-07-2025</strong>.</p>
+                <p>As a valued tenant, we would like to continue having you living in our community. We hope you intend to be renewing for another term.</p>
+                <p>Please acknowledge by selecting an option below so that we can serve you better.</p>
+
+                <div class="buttons">
+                    <a href="#" class="btn-yes">
+                        <img src="https://img.icons8.com/ios-filled/50/ffffff/checkmark.png" alt="Yes"> YES – Renew Lease
+                    </a>
+                    <a href="#" class="btn-no">
+                        <img src="https://img.icons8.com/ios-filled/50/ffffff/delete-sign.png" alt="No"> NO – Do Not Renew
+                    </a>
+                    <a href="#" class="btn-deciding">
+                        <img src="https://img.icons8.com/ios-filled/50/000000/time.png" alt="Deciding"> DECIDING – Remind Me Later
+                    </a>
+                </div>
+
+                <div class="section">
+                    <h3>📱 Why Use the JOY App?</h3>
+                    <div class="scroll-wrapper">
+                        <!-- Left Arrow -->
+                        <button class="scroll-arrow left"
+                                onmousedown="startScroll(-1)"
+                                onmouseup="stopScroll()"
+                                onmouseleave="stopScroll()"
+                                onclick="scrollOnce(-1)">
+                            &#9664;
+                        </button>
+
+                        <!-- Right Arrow -->
+                        <button class="scroll-arrow right"
+                                onmousedown="startScroll(1)"
+                                onmouseup="stopScroll()"
+                                onmouseleave="stopScroll()"
+                                onclick="scrollOnce(1)">
+                            &#9654;
+                        </button>
+
+                        <div class="benefit-icons" id="benefitScroll">
+                            <div class="icon-item">
+                                <img src="https://img.icons8.com/ios-filled/50/maintenance.png" alt="Maintenance">
+                                <span>Request Services</span>
+                            </div>
+                            <div class="icon-item">
+                                <img src="https://img.icons8.com/ios-filled/50/chat.png" alt="Chat">
+                                <span>Real-Time Chat</span>
+                            </div>
+                            <div class="icon-item">
+                                <img src="https://img.icons8.com/ios-filled/50/alarm.png" alt="Alerts">
+                                <span>Smart Alerts</span>
+                            </div>
+                            <div class="icon-item">
+                                <img src="https://img.icons8.com/ios-filled/50/combo-chart.png" alt="Feedback">
+                                <span>Feedback</span>
+                            </div>
+                            <div class="icon-item">
+                                <img src="https://img.icons8.com/ios-filled/50/swimming-pool.png" alt="Amenities">
+                                <span>Amenities</span>
+                            </div>
+                        </div>
+
+                        <button class="scroll-arrow right" onmousedown="startScroll(1)" onmouseup="stopScroll()" onmouseleave="stopScroll()">&#9654;</button>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3>📞 Need Help?</h3>
+                    <p>If you experience any issues, please contact our building management.</p>
+                    <div class="admin-emails">
+                        <div>
+                            <strong>Property Manager:</strong><br>
+                            <a href="mailto:vb00@bhomesqatar.com">vb00@bhomesqatar.com</a>
+                        </div>
+                        <div>
+                            <strong>Receptionist:</strong><br>
+                            <a href="mailto:vb00receptionist@bhomesqatar.com">vb00receptionist@bhomesqatar.com</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer">
+                <a href="https://joyapp.ai/">&copy; 2025 JOY App. All rights reserved.</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
