@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
@@ -54,87 +54,6 @@
                 border-bottom: 2px solid #FF6600;
                 padding-bottom: 5px;
             }
-
-        .scroll-wrapper {
-            position: relative;
-            width: 100%;
-        }
-
-        .benefit-icons {
-            display: flex;
-            gap: 20px;
-            overflow-x: auto;
-            padding: 10px 40px;
-            margin-top: 25px;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            scroll-behavior: smooth;
-            position: relative;
-        }
-
-        .icon-item {
-            flex: 0 0 auto;
-            scroll-snap-align: start;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            min-width: 100px;
-            color: #333;
-            font-size: 14px;
-        }
-
-            .icon-item img {
-                width: 40px;
-                height: 40px;
-                margin-bottom: 10px;
-            }
-
-        .scroll-arrow {
-            background: #ffffff;
-            color: #333;
-            border: 1px solid #ccc;
-            font-size: 22px;
-            padding: 10px;
-            cursor: pointer;
-            position: absolute;
-            top: 40%; /* updated from 50% to 40% */
-            transform: translateY(-40%); /* updated from -50% to -40% */
-            z-index: 5;
-            border-radius: 50%;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            transition: background 0.2s;
-        }
-
-
-            .scroll-arrow:hover {
-                background: #eee;
-            }
-
-            .scroll-arrow.left {
-                left: 10px;
-            }
-
-            .scroll-arrow.right {
-                right: 10px;
-            }
-
-        @media (min-width: 768px) {
-            .benefit-icons {
-                flex-wrap: wrap;
-                justify-content: center;
-                overflow-x: visible;
-                padding: 10px;
-            }
-
-            .icon-item {
-                min-width: 120px;
-            }
-
-            .scroll-arrow {
-                display: none;
-            }
-        }
 
         .buttons {
             display: flex;
@@ -228,57 +147,77 @@
                     }
         }
 
+        /* Scrollable Benefits Section */
+        .benefit-scroll-wrapper {
+            position: relative;
+            overflow-x: auto;
+            white-space: nowrap;
+            padding: 10px 0;
+            margin-top: 20px;
+            scroll-behavior: smooth;
+        }
 
-        @media (max-width: 500px) {
-            .scroll-arrow {
-                top: 35%;
-                transform: translateY(-35%);
-                padding: 6px;
-                font-size: 18px;
+            .benefit-scroll-wrapper::-webkit-scrollbar {
+                height: 6px;
             }
 
-            .benefit-icons {
-                padding: 10px 30px;
-                gap: 15px;
+            .benefit-scroll-wrapper::-webkit-scrollbar-thumb {
+                background-color: #ccc;
+                border-radius: 3px;
             }
+
+        .benefit-icons {
+            display: inline-flex;
+            gap: 20px;
+            padding: 0 10px;
+        }
+
+        .icon-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            min-width: 100px;
+            color: #333;
+            font-size: 14px;
+        }
 
             .icon-item img {
-                width: 36px;
-                height: 36px;
+                width: 40px;
+                height: 40px;
+                margin-bottom: 8px;
             }
+
+        .scroll-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 24px;
+            height: 24px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
         }
+
+            .scroll-arrow img {
+                width: 14px;
+                height: 14px;
+                opacity: 0.6;
+            }
+
+            .scroll-arrow.left {
+                left: 5px;
+            }
+
+            .scroll-arrow.right {
+                right: 5px;
+            }
     </style>
-
-    <script>
-        let scrollInterval;
-
-        function startScroll(direction) {
-            const scrollContainer = document.getElementById("benefitScroll");
-            const scrollStep = direction * 10;
-
-            scrollInterval = setInterval(() => {
-                scrollContainer.scrollBy({
-                    left: scrollStep,
-                    behavior: 'smooth'
-                });
-            }, 100);
-        }
-
-        function stopScroll() {
-            clearInterval(scrollInterval);
-        }
-
-        // ✅ New function for click/tap scroll
-        function scrollOnce(direction) {
-            const scrollContainer = document.getElementById("benefitScroll");
-            scrollContainer.scrollBy({
-                left: direction * 150, // Adjust distance if needed
-                behavior: 'smooth'
-            });
-        }
-    </script>
-
-
 </head>
 <body>
     <div class="container">
@@ -308,26 +247,15 @@
 
                 <div class="section">
                     <h3>📱 Why Use the JOY App?</h3>
-                    <div class="scroll-wrapper">
-                        <!-- Left Arrow -->
-                        <button class="scroll-arrow left"
-                                onmousedown="startScroll(-1)"
-                                onmouseup="stopScroll()"
-                                onmouseleave="stopScroll()"
-                                onclick="scrollOnce(-1)">
-                            &#9664;
-                        </button>
+                    <div class="benefit-scroll-wrapper">
+                        <div class="scroll-arrow left">
+                            <img src="https://img.icons8.com/ios-filled/50/000000/chevron-left.png" alt="←" />
+                        </div>
+                        <div class="scroll-arrow right">
+                            <img src="https://img.icons8.com/ios-filled/50/000000/chevron-right.png" alt="→" />
+                        </div>
 
-                        <!-- Right Arrow -->
-                        <button class="scroll-arrow right"
-                                onmousedown="startScroll(1)"
-                                onmouseup="stopScroll()"
-                                onmouseleave="stopScroll()"
-                                onclick="scrollOnce(1)">
-                            &#9654;
-                        </button>
-
-                        <div class="benefit-icons" id="benefitScroll">
+                        <div class="benefit-icons">
                             <div class="icon-item">
                                 <img src="https://img.icons8.com/ios-filled/50/maintenance.png" alt="Maintenance">
                                 <span>Request Services</span>
@@ -348,9 +276,8 @@
                                 <img src="https://img.icons8.com/ios-filled/50/swimming-pool.png" alt="Amenities">
                                 <span>Amenities</span>
                             </div>
+                            <!-- Add more if needed -->
                         </div>
-
-                        <button class="scroll-arrow right" onmousedown="startScroll(1)" onmouseup="stopScroll()" onmouseleave="stopScroll()">&#9654;</button>
                     </div>
                 </div>
 
